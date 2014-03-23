@@ -30,8 +30,7 @@ public class Invoice {
     public String getDueDateAsString(){
         String dateFormat = "M/d/yyyy";
         SimpleDateFormat format = new SimpleDateFormat(dateFormat);
-        Date date;
-        
+        Date date;      
         date = dueDate.getTime();
         String dateString = format.format(date);
         return dateString;
