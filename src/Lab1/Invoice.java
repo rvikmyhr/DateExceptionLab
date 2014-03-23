@@ -42,7 +42,10 @@ public class Invoice {
         return invoiceDate;
     }
 
-    public void setInvoiceDate(Calendar invoiceDate) {
+    public void setInvoiceDate(Calendar invoiceDate) throws RuntimeException {
+        if (invoiceDate == null){
+            throw new RuntimeException();
+        }
         this.invoiceDate = invoiceDate;
     }
 
@@ -50,7 +53,10 @@ public class Invoice {
         return gracePeriod;
     }
 
-    public void setGracePeriod(int gracePeriod) {
+    public void setGracePeriod(int gracePeriod) throws IllegalArgumentException {
+        if (gracePeriod < 0) {
+         throw new IllegalArgumentException();
+        }
         this.gracePeriod = gracePeriod;
     }
 
@@ -58,13 +64,15 @@ public class Invoice {
         return dueDate;
     }
 
-    public void setDueDate(Calendar dueDate) {
+    public void setDueDate(Calendar dueDate) throws RuntimeException {
+        if (dueDate == null){
+            throw new RuntimeException();
+        }
         this.dueDate = dueDate;
     }
     
     public static void main(String[] args) {
         Invoice invoice = new Invoice();
-        
         
         System.out.println(invoice.getNewDueDate());
         System.out.println(invoice.getDueDateAsString());

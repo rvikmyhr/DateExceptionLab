@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Lab1;
 
 import java.text.ParseException;
@@ -19,24 +18,38 @@ public class DateService {
 
     private Date date;
     private Calendar calendar;
-    
-    public void convertStringToDate(String dateString){
-        String format = "M/d/yyyy";
-        SimpleDateFormat strToDate = new SimpleDateFormat(format);
-        try{
-        date = strToDate.parse(dateString);
-        } catch(ParseException pe){
+
+    public void convertStringToDate(String dateString) {
+        try {
+            if (dateString.length() == 0) {
+                throw new RequiredValueException();
+            }
+
+            if (dateString == null) {
+                throw new RuntimeException();
+            }
+            String format = "M/d/yyyy";
+            SimpleDateFormat strToDate = new SimpleDateFormat(format);
+
+            date = strToDate.parse(dateString);
+        } catch (ParseException pe) {
             System.out.println("Use correct format");
+        } catch (RequiredValueException rv){
+            System.out.println(rv.getMessage());
         }
+
     }
-    
-    public void convertStringToCalendar(String dateString){
+
+    public void convertStringToCalendar(String dateString) throws RuntimeException {
+        if (dateString == null || dateString.length() == 0) {
+            throw new RuntimeException();
+        }
         calendar = Calendar.getInstance();
         String format = "MMMMM d, yyyy h:mm a";
         SimpleDateFormat strToDate = new SimpleDateFormat(format);
-        try{
-        calendar.setTime(strToDate.parse(dateString));
-        } catch(ParseException pe){
+        try {
+            calendar.setTime(strToDate.parse(dateString));
+        } catch (ParseException pe) {
             System.out.println("Use correct format");
         }
     }
@@ -45,7 +58,10 @@ public class DateService {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Date date) throws RuntimeException {
+        if (date == null) {
+            throw new RuntimeException();
+        }
         this.date = date;
     }
 
@@ -53,18 +69,20 @@ public class DateService {
         return calendar;
     }
 
-    public void setCalendar(Calendar calendar) {
+    public void setCalendar(Calendar calendar) throws RuntimeException {
+        if (calendar == null) {
+            throw new RuntimeException();
+        }
         this.calendar = calendar;
     }
-    
-    
-    
-    public static void main(String[] args) {
-        DateService ds = new DateService();
-        ds.convertStringToDate("3/15/2014");
-        System.out.println(ds.getDate());
-        ds.convertStringToCalendar("March 15, 2014 2:30 PM");
-        System.out.println(ds.getCalendar());
-    }
-    
+
+//    public static void main(String[] args) {
+//        DateService ds = new DateService();
+//  
+//        ds.convertStringToDate("3/15/2014");
+//      
+//        System.out.println(ds.getDate());
+//        ds.convertStringToCalendar("March 15, 2014 2:30 PM");
+//        System.out.println(ds.getCalendar());
+//    }
 }
