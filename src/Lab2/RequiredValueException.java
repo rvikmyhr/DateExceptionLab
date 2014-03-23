@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Lab1;
+package Lab2;
 
 /**
  *
