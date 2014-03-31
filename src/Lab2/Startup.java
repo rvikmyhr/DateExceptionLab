@@ -20,27 +20,27 @@ public class Startup {
         try {
             ds.convertStringToDate("");
         } catch (RuntimeException rt) {
-            System.out.println("Must enter value");
+            System.out.println(rt.getMessage());
         }
         
         System.out.println(ds.getDate());
         try {
             ds.convertStringToCalendar("March 15, 2014 2:30 PM");
         } catch (RuntimeException rt) {
-            System.out.println("Must enter value");
+            System.out.println(rt.getMessage());
         }
         System.out.println(ds.getCalendar());
         
         try {
         ds.setDate();
         } catch (RuntimeException rt) {
-            System.out.println("Must enter a value");
+            System.out.println("Cant be null");
         }
         
         try{
         ds.setCalendar();
         } catch (RuntimeException rt) {
-            System.out.println("No value entered");
+            System.out.println("Cant be null");
         }
        
     }

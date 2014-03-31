@@ -19,30 +19,30 @@ public class DateService {
     private Date date;
     private Calendar calendar;
 
-    public void convertStringToDate(String dateString) {
+    public void convertStringToDate(String dateString) throws RuntimeException {
+
+        if (dateString.length() == 0) {
+            throw new RequiredValueException();
+        }
+
+        if (dateString == null) {
+            throw new RuntimeException();
+        }
+        String format = "M/d/yyyy";
+        SimpleDateFormat strToDate = new SimpleDateFormat(format);
         try {
-            if (dateString.length() == 0) {
-                throw new RequiredValueException();
-            }
-
-            if (dateString == null) {
-                throw new RuntimeException();
-            }
-            String format = "M/d/yyyy";
-            SimpleDateFormat strToDate = new SimpleDateFormat(format);
-
             date = strToDate.parse(dateString);
         } catch (ParseException pe) {
             System.out.println("Use correct format");
-        } catch (RequiredValueException rv){
-            System.out.println(rv.getMessage());
         }
-
     }
 
     public void convertStringToCalendar(String dateString) throws RuntimeException {
-        if (dateString == null || dateString.length() == 0) {
+        if (dateString == null) {
             throw new RuntimeException();
+        }
+        if (dateString.length() == 0){
+            throw new RequiredValueException();
         }
         calendar = Calendar.getInstance();
         String format = "MMMMM d, yyyy h:mm a";
